@@ -1,0 +1,135 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    ThirdWindow:
+    
+    
+<MainWindow>:
+    name: "main"
+    
+    Label:
+        text: "Disease Prediction by Symptoms"
+        font_size: 24
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .6, 'x': .475}
+        color: 0, 0, 0, 1
+     
+    Button:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
+        text: "Start"
+        font_size: 12
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .5, 'x': .475} 
+        on_release: 
+            app.root.current = "second"
+            root.manager.transition.direction = "left"
+        
+        
+        
+    
+<SecondWindow>:
+    name: "second"
+    
+    Label:
+        text: "Question#1"
+        font_size: 24
+        color: 0,0,0,1
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .7, 'x': .475}
+        
+    Label:
+        text: "Answer #1"
+        font_size: 24
+        color: 0,0,0,1
+        size: 75,50
+        size_hint: None, None
+        pos_hint: {'y': .6, 'x': .3}  
+        
+    CheckBox:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
+        font_size: 24
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .6, 'x': .7}
+        
+    Label:
+        text: "Answer #1"
+        font_size: 24
+        color: 0,0,0,1
+        size: 75,50
+        size_hint: None, None
+        pos_hint: {'y': .5, 'x': .3}  
+        
+    CheckBox:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
+        font_size: 24
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .5, 'x': .7}
+    
+    Label:
+        text: "Answer #1"
+        font_size: 24
+        color: 0,0,0,1
+        size: 75,50
+        size_hint: None, None
+        pos_hint: {'y': .4, 'x': .3}  
+        
+    CheckBox:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
+        font_size: 24
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .4, 'x': .7}
+         
+    Button:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
+        text: "Go Back"
+        font_size: 12
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .2, 'x': .35}
+        on_release: 
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+            
+    Button:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
+        text: "Next"
+        font_size: 12
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .2, 'x': .55}
+        on_release: 
+            app.root.current = "third"
+            root.manager.transition.direction = "left"
+            
+<ThirdWindow>:
+    name: "third"
+    
+    Button:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
+        text: "Go Back"
+        font_size: 12
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .2, 'x': .35}
+        on_release: 
+            app.root.current = "second"
+            root.manager.transition.direction = "right"
+            
+    Button:
+        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
+        text: "Next"
+        font_size: 12
+        size: 75, 50
+        size_hint: None, None
+        pos_hint: {'y': .2, 'x': .55}
+        on_release: 
+            app.root.current = "third"
+            root.manager.transition.direction = "left"
+    
+        
