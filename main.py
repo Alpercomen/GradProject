@@ -25,6 +25,9 @@ class SecondWindow(Screen):
     answer1 = BooleanProperty(False)
     answer2 = BooleanProperty(False)
     answer3 = BooleanProperty(False)
+    
+    def btn(self):
+        print(f"Answer 1: {self.answer1} Answer 2: {self.answer2} Answer 3: {self.answer3}")
 
 class ThirdWindow(Screen):
     def __init__(self, **kwargs):
