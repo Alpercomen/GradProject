@@ -1,3 +1,29 @@
+<CustomLabel@Label>
+    valign: "middle"
+    font_size: 24
+    color: 0, 0, 0, 1
+    size_hint: .2, .2
+    pos_hint: {'x': .4}
+
+<CustomButton@Button>
+    valign: "middle"
+    font_size: 24
+    background_color: 0, 0.5, 1, 0.5
+    size_hint: .2, .2
+    pos_hint: {'x': .4}
+    
+<CustomBoxLayout@BoxLayout>
+    orientation: 'vertical'
+    size: self.parent.size
+    pos: self.parent.pos
+    
+<CustomCheckBox@CheckBox>
+    valign: "middle"
+    size_hint: .2, .2
+    pos_hint: {'x': .4}
+    background_color: 0, 0.5, 1, 0.5
+    color: 0, 0, 1, 0.5
+
 WindowManager:
     MainWindow:
     SecondWindow:
@@ -7,129 +33,80 @@ WindowManager:
 <MainWindow>:
     name: "main"
     
-    Label:
-        text: "Disease Prediction by Symptoms"
-        font_size: 24
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .6, 'x': .475}
-        color: 0, 0, 0, 1
-     
-    Button:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
-        text: "Start"
-        font_size: 12
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .5, 'x': .475} 
-        on_release: 
-            app.root.current = "second"
-            root.manager.transition.direction = "left"
-        
-        
-        
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Disease Prediction by Symptoms"
+        CustomButton:
+            text: "Start"
+            on_release: 
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+                
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            
+            CustomButton:
+                text: "Home"
+                
+            CustomButton:
+                text: "Statistics"
+                
     
 <SecondWindow>:
     name: "second"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
     
-    Label:
-        text: "Question#1"
-        font_size: 24
-        color: 0,0,0,1
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .7, 'x': .475}
-        
-    Label:
-        text: "Answer #1"
-        font_size: 24
-        color: 0,0,0,1
-        size: 75,50
-        size_hint: None, None
-        pos_hint: {'y': .6, 'x': .3}  
-        
-    CheckBox:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
-        font_size: 24
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .6, 'x': .7}
-        
-    Label:
-        text: "Answer #2"
-        font_size: 24
-        color: 0,0,0,1
-        size: 75,50
-        size_hint: None, None
-        pos_hint: {'y': .5, 'x': .3}  
-        
-    CheckBox:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
-        font_size: 24
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .5, 'x': .7}
     
-    Label:
-        text: "Answer #3"
-        font_size: 24
-        color: 0,0,0,1
-        size: 75,50
-        size_hint: None, None
-        pos_hint: {'y': .4, 'x': .3}  
-        
-    CheckBox:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5
-        font_size: 24
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .4, 'x': .7}
-         
-    Button:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
-        text: "Go Back"
-        font_size: 12
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .2, 'x': .35}
-        on_release: 
-            app.root.current = "main"
-            root.manager.transition.direction = "right"
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Question #1"
+            font_size: 24
+            color: 0, 0, 0, 1
             
-    Button:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
-        text: "Next"
-        font_size: 12
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .2, 'x': .55}
-        on_release: 
-            app.root.current = "third"
-            root.manager.transition.direction = "left"
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: "Answer #1"
+                
+                CustomCheckBox:
+                    id: answer1
+                    
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: "Answer #2"
+                
+                CustomCheckBox:
+                    id: answer2
+                    
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: "Answer #3"
+                
+                CustomCheckBox:
+                    id: answer3
+                
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release: 
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+                    
+            CustomButton:
+                text: "Next"
+                on_release: 
+                    app.root.current = "third"
+                    root.manager.transition.direction = "left" 
+        
             
 <ThirdWindow>:
     name: "third"
     
-    Button:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
-        text: "Go Back"
-        font_size: 12
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .2, 'x': .35}
-        on_release: 
-            app.root.current = "second"
-            root.manager.transition.direction = "right"
-            
-    Button:
-        background_color: 0.203921568627451, 0.5725490196078431, 0.9215686274509804, 0.5 
-        text: "Next"
-        font_size: 12
-        size: 75, 50
-        size_hint: None, None
-        pos_hint: {'y': .2, 'x': .55}
-        on_release: 
-            app.root.current = "third"
-            root.manager.transition.direction = "left"
     
         
