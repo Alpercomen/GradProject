@@ -29,7 +29,6 @@ WindowManager:
     SecondWindow:
     ThirdWindow:
     
-    
 <MainWindow>:
     name: "main"
     
@@ -62,17 +61,17 @@ WindowManager:
     CustomBoxLayout:
         CustomLabel:
             text: "Question #1"
-            font_size: 24
+            font_size: 32
             color: 0, 0, 0, 1
             
-        CustomBoxLayout:
-            CustomBoxLayout:
-                orientation: "horizontal"
-                CustomLabel:
-                    text: "Answer #1"
-                
-                CustomCheckBox:
-                    id: answer1
+        CustomBoxLayout:                                        #
+            CustomBoxLayout:                                    #
+                orientation: "horizontal"                       #
+                CustomLabel:                                    #   This section will create an answer and a checkbox next to it
+                    text: "Answer #1"                           #
+                                                                #
+                CustomCheckBox:                                 #
+                    id: answer1                                 #
                     
             CustomBoxLayout:
                 orientation: "horizontal"
