@@ -24,7 +24,7 @@ diseases_norm = pd.get_dummies(diseases, drop_first=True)
 model = LogisticRegression(solver='lbfgs')
 
 #Create and store user symptoms
-symptom_user = np.array([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]])
+symptom_user = np.array([[1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]])
 
 for x in range(len(diseases_norm.iloc[0])):
     #Split into train set and test set
