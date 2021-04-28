@@ -28,6 +28,7 @@ WindowManager:
     MainWindow:
     SecondWindow:
     ThirdWindow:
+    FinalWindow:
     
 <MainWindow>:
     name: "main"
@@ -96,16 +97,97 @@ WindowManager:
                 on_release: 
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(0, answer1.active)
+                    root.set_value(1, answer2.active)
+                    root.set_value(2, answer3.active)
                     
             CustomButton:
                 text: "Next"
                 on_release: 
                     app.root.current = "third"
-                    root.manager.transition.direction = "left" 
+                    root.manager.transition.direction = "left"
+                    
+                on_press:
+                    root.set_value(0, answer1.active)
+                    root.set_value(1, answer2.active)
+                    root.set_value(2, answer3.active)
         
             
 <ThirdWindow>:
     name: "third"
-    
-    
-        
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+     
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Question #2"
+            font_size: 32
+            color: 0, 0, 0, 1
+            
+        CustomBoxLayout:                                        #
+            CustomBoxLayout:                                    #
+                orientation: "horizontal"                       #
+                CustomLabel:                                    #   This section will create an answer and a checkbox next to it
+                    text: "Answer #4"                           #
+                                                                #
+                CustomCheckBox:                                 #
+                    id: answer4                                 #
+                    
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: "Answer #5"
+                
+                CustomCheckBox:
+                    id: answer5
+                    
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: "Answer #6"
+                
+                CustomCheckBox:
+                    id: answer6
+                
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release: 
+                    app.root.current = "second"
+                    root.manager.transition.direction = "right"
+                    
+                on_press:
+                    root.set_value(3, answer4.active)
+                    root.set_value(4, answer5.active)
+                    root.set_value(5, answer6.active)
+                    
+            CustomButton:
+                text: "Next"
+                on_release: 
+                    app.root.current = "final"
+                    root.manager.transition.direction = "left"
+                
+                on_press:
+                    root.set_value(3, answer4.active)
+                    root.set_value(4, answer5.active)
+                    root.set_value(5, answer6.active)
+                    root.train()
+                    
+<FinalWindow>:
+    name: "final"
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Training results..."
+            font_size: 32
+            color: 0, 0, 0, 1
+                
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release: 
+                    app.root.current = "third"
+                    root.manager.transition.direction = "right"
