@@ -1,16 +1,23 @@
 <CustomLabel@Label>
     valign: "middle"
-    font_size: 24
+    halign: "center"
     color: 0, 0, 0, 1
     size_hint: .2, .2
     pos_hint: {'x': .4}
+    font_size: 18
+    padding: 1, 25
+    markup: True
+    text_size: cm(6), cm(4)
+
+<CustomImage@Image>
+    allow_stretch: True
+    pos_hint: {'x': 0, 'y': .9}
 
 <CustomButton@Button>
     valign: "middle"
-    font_size: 24
     background_color: 0, 0.5, 1, 0.5
     size_hint: .2, .2
-    pos_hint: {'x': .4}
+
     
 <CustomBoxLayout@BoxLayout>
     orientation: 'vertical'
@@ -25,31 +32,29 @@
     color: 0, 0, 1, 0.5
 
 WindowManager:
-    MainWindow:
+    FirstWindow:
     SecondWindow:
     ThirdWindow:
+    FourthWindow:
+    FifthWindow:
+    SixthWindow:
+    SeventhWindow:
+    EighthWindow:
+    NinthWindow:
     FinalWindow:
     
-<MainWindow>:
+<FirstWindow>:
     name: "main"
-    
+
     CustomBoxLayout:
         CustomLabel:
             text: "Disease Prediction by Symptoms"
+            pos_hint: {'center_x': .5}
         CustomButton:
             text: "Start"
-            on_release: 
+            on_release:
                 app.root.current = "second"
                 root.manager.transition.direction = "left"
-                
-        CustomBoxLayout:
-            orientation: 'horizontal'
-            
-            CustomButton:
-                text: "Home"
-                
-            CustomButton:
-                text: "Statistics"
                 
     
 <SecondWindow>:
@@ -57,27 +62,29 @@ WindowManager:
     answer1: answer1
     answer2: answer2
     answer3: answer3
-    
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
     
     CustomBoxLayout:
         CustomLabel:
-            text: "Question #1"
-            font_size: 32
+            text: "Do you experience the following symptoms?"
             color: 0, 0, 0, 1
             
-        CustomBoxLayout:                                        #
-            CustomBoxLayout:                                    #
-                orientation: "horizontal"                       #
-                CustomLabel:                                    #   This section will create an answer and a checkbox next to it
-                    text: "Answer #1"                           #
-                                                                #
-                CustomCheckBox:                                 #
-                    id: answer1                                 #
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(0))
+
+                CustomCheckBox:
+                    id: answer1
                     
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
-                    text: "Answer #2"
+                    text: str(root.print_symptom(1))
                 
                 CustomCheckBox:
                     id: answer2
@@ -85,11 +92,35 @@ WindowManager:
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
-                    text: "Answer #3"
+                    text: str(root.print_symptom(2))
                 
                 CustomCheckBox:
                     id: answer3
-                
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(3))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(4))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(5))
+
+                CustomCheckBox:
+                    id: answer6
+
         CustomBoxLayout:
             orientation: 'horizontal'
             CustomButton:
@@ -101,6 +132,9 @@ WindowManager:
                     root.set_value(0, answer1.active)
                     root.set_value(1, answer2.active)
                     root.set_value(2, answer3.active)
+                    root.set_value(3, answer4.active)
+                    root.set_value(4, answer5.active)
+                    root.set_value(5, answer6.active)
                     
             CustomButton:
                 text: "Next"
@@ -112,45 +146,74 @@ WindowManager:
                     root.set_value(0, answer1.active)
                     root.set_value(1, answer2.active)
                     root.set_value(2, answer3.active)
+                    root.set_value(3, answer4.active)
+                    root.set_value(4, answer5.active)
+                    root.set_value(5, answer6.active)
         
             
 <ThirdWindow>:
     name: "third"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
     answer4: answer4
     answer5: answer5
     answer6: answer6
      
     CustomBoxLayout:
         CustomLabel:
-            text: "Question #2"
-            font_size: 32
+            text: "Do you experience the following symptoms?"
             color: 0, 0, 0, 1
             
-        CustomBoxLayout:                                        #
-            CustomBoxLayout:                                    #
-                orientation: "horizontal"                       #
-                CustomLabel:                                    #   This section will create an answer and a checkbox next to it
-                    text: "Answer #4"                           #
-                                                                #
-                CustomCheckBox:                                 #
-                    id: answer4                                 #
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(6))
+
+                CustomCheckBox:
+                    id: answer1
                     
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
-                    text: "Answer #5"
+                    text: str(root.print_symptom(7))
                 
+                CustomCheckBox:
+                    id: answer2
+                    
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(8))
+                
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(9))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(10))
+
                 CustomCheckBox:
                     id: answer5
-                    
+
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
-                    text: "Answer #6"
-                
+                    text: str(root.print_symptom(11))
+
                 CustomCheckBox:
                     id: answer6
-                
+
         CustomBoxLayout:
             orientation: 'horizontal'
             CustomButton:
@@ -160,34 +223,576 @@ WindowManager:
                     root.manager.transition.direction = "right"
                     
                 on_press:
-                    root.set_value(3, answer4.active)
-                    root.set_value(4, answer5.active)
-                    root.set_value(5, answer6.active)
+                    root.set_value(6, answer1.active)
+                    root.set_value(7, answer2.active)
+                    root.set_value(8, answer3.active)
+                    root.set_value(9, answer4.active)
+                    root.set_value(10, answer5.active)
+                    root.set_value(11, answer6.active)
                     
             CustomButton:
                 text: "Next"
                 on_release: 
-                    app.root.current = "final"
+                    app.root.current = "fourth"
                     root.manager.transition.direction = "left"
                 
                 on_press:
-                    root.set_value(3, answer4.active)
-                    root.set_value(4, answer5.active)
-                    root.set_value(5, answer6.active)
+                    root.set_value(6, answer1.active)
+                    root.set_value(7, answer2.active)
+                    root.set_value(8, answer3.active)
+                    root.set_value(9, answer4.active)
+                    root.set_value(10, answer5.active)
+                    root.set_value(11, answer6.active)
+
+<FourthWindow>:
+    name: "fourth"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(12))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(13))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(14))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(15))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(16))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(17))
+
+                CustomCheckBox:
+                    id: answer6
+
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "third"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(12, answer1.active)
+                    root.set_value(13, answer2.active)
+                    root.set_value(14, answer3.active)
+                    root.set_value(15, answer4.active)
+                    root.set_value(16, answer5.active)
+                    root.set_value(17, answer6.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "fifth"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(12, answer1.active)
+                    root.set_value(13, answer2.active)
+                    root.set_value(14, answer3.active)
+                    root.set_value(15, answer4.active)
+                    root.set_value(16, answer5.active)
+                    root.set_value(17, answer6.active)
+
+<FifthWindow>:
+    name: "fifth"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(18))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(19))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(20))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(21))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(22))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(23))
+
+                CustomCheckBox:
+                    id: answer6
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "fourth"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(18, answer1.active)
+                    root.set_value(19, answer2.active)
+                    root.set_value(20, answer3.active)
+                    root.set_value(21, answer4.active)
+                    root.set_value(22, answer5.active)
+                    root.set_value(23, answer6.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "sixth"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(18, answer1.active)
+                    root.set_value(19, answer2.active)
+                    root.set_value(20, answer3.active)
+                    root.set_value(21, answer4.active)
+                    root.set_value(22, answer5.active)
+                    root.set_value(23, answer6.active)
+
+<SixthWindow>:
+    name: "sixth"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(24))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(25))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(26))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(27))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(28))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(29))
+
+                CustomCheckBox:
+                    id: answer6
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "fifth"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(24, answer1.active)
+                    root.set_value(25, answer2.active)
+                    root.set_value(26, answer3.active)
+                    root.set_value(27, answer4.active)
+                    root.set_value(28, answer5.active)
+                    root.set_value(29, answer6.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "seventh"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(24, answer1.active)
+                    root.set_value(25, answer2.active)
+                    root.set_value(26, answer3.active)
+                    root.set_value(27, answer4.active)
+                    root.set_value(28, answer5.active)
+                    root.set_value(29, answer6.active)
+
+<SeventhWindow>:
+    name: "seventh"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(30))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(31))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(32))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(33))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(34))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(35))
+
+                CustomCheckBox:
+                    id: answer6
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "sixth"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(30, answer1.active)
+                    root.set_value(31, answer2.active)
+                    root.set_value(32, answer3.active)
+                    root.set_value(33, answer4.active)
+                    root.set_value(34, answer5.active)
+                    root.set_value(35, answer6.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "eighth"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(30, answer1.active)
+                    root.set_value(31, answer2.active)
+                    root.set_value(32, answer3.active)
+                    root.set_value(33, answer4.active)
+                    root.set_value(34, answer5.active)
+                    root.set_value(35, answer6.active)
+
+<EighthWindow>:
+    name: "eighth"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+    answer5: answer5
+    answer6: answer6
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(36))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(37))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(38))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(39))
+
+                CustomCheckBox:
+                    id: answer4
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(40))
+
+                CustomCheckBox:
+                    id: answer5
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(41))
+
+                CustomCheckBox:
+                    id: answer6
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "seventh"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(36, answer1.active)
+                    root.set_value(37, answer2.active)
+                    root.set_value(38, answer3.active)
+                    root.set_value(39, answer4.active)
+                    root.set_value(40, answer5.active)
+                    root.set_value(41, answer6.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "ninth"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(36, answer1.active)
+                    root.set_value(37, answer2.active)
+                    root.set_value(38, answer3.active)
+                    root.set_value(39, answer4.active)
+                    root.set_value(40, answer5.active)
+                    root.set_value(41, answer6.active)
+
+<NinthWindow>:
+    name: "ninth"
+    answer1: answer1
+    answer2: answer2
+    answer3: answer3
+    answer4: answer4
+
+    CustomBoxLayout:
+        CustomLabel:
+            text: "Do you experience the following symptoms?"
+            color: 0, 0, 0, 1
+
+        CustomBoxLayout:
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(42))
+
+                CustomCheckBox:
+                    id: answer1
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(43))
+
+                CustomCheckBox:
+                    id: answer2
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(44))
+
+                CustomCheckBox:
+                    id: answer3
+
+            CustomBoxLayout:
+                orientation: "horizontal"
+                CustomLabel:
+                    text: str(root.print_symptom(45))
+
+                CustomCheckBox:
+                    id: answer4
+
+        CustomBoxLayout:
+            orientation: 'horizontal'
+            CustomButton:
+                text: "Go Back"
+                on_release:
+                    app.root.current = "eighth"
+                    root.manager.transition.direction = "right"
+                on_press:
+                    root.set_value(42, answer1.active)
+                    root.set_value(43, answer2.active)
+                    root.set_value(44, answer3.active)
+                    root.set_value(45, answer4.active)
+
+            CustomButton:
+                text: "Next"
+                on_release:
+                    app.root.current = "final"
+                    root.manager.transition.direction = "left"
+
+                on_press:
+                    root.set_value(42, answer1.active)
+                    root.set_value(43, answer2.active)
+                    root.set_value(44, answer3.active)
+                    root.set_value(45, answer4.active)
                     root.train()
-                    
+
 <FinalWindow>:
     name: "final"
     CustomBoxLayout:
         CustomLabel:
             text: "Training results..."
-            font_size: 32
-            color: 0, 0, 0, 1
-                
-        CustomBoxLayout:
-            orientation: 'horizontal'
-            CustomButton:
-                text: "Go Back"
-                on_release: 
-                    app.root.current = "third"
-                    root.manager.transition.direction = "right"
+            valign: "top"
+    CustomBoxLayout:
+        orientation: 'horizontal'
+        CustomButton:
+            text: "Go Back"
+            on_release:
+                app.root.current = "ninth"
+                root.manager.transition.direction = "right"
+
+        CustomButton:
+            text: "Menu"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+                root.reset_answer()
