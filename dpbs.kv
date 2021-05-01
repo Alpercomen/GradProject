@@ -9,10 +9,6 @@
     markup: True
     text_size: cm(6), cm(4)
 
-<CustomImage@Image>
-    allow_stretch: True
-    pos_hint: {'x': 0, 'y': .9}
-
 <CustomButton@Button>
     valign: "middle"
     background_color: 0, 0.5, 1, 0.5
@@ -50,11 +46,14 @@ WindowManager:
         CustomLabel:
             text: "Disease Prediction by Symptoms"
             pos_hint: {'center_x': .5}
-        CustomButton:
-            text: "Start"
-            on_release:
-                app.root.current = "second"
-                root.manager.transition.direction = "left"
+        AnchorLayout:
+            CustomButton:
+                text: "Start"
+                size_hint: .2, .2
+                pos_hint: {'y': .3}
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "left"
                 
     
 <SecondWindow>:

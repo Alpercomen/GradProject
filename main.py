@@ -111,7 +111,7 @@ class NinthWindow(Window):
             model.fit(X_train, y_train)
             features = model.predict_proba(symptom_user)
             probabilities[disease_prob] = int(features[0, 1] * 10000)
-            print(f"Probability for the {diseases_norm.columns.values[disease_prob]}:\n{round(features[0, 1] * 100, 2)}%")
+            print(f"Score for the disease {diseases_norm.columns.values[disease_prob]}:\n{round(features[0, 1] * 10000, 2)}")
 
         prob_indices = heapq.nlargest(5, range(len(probabilities)), probabilities.__getitem__)
         max_prob = [None] * 5
