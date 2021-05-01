@@ -12,6 +12,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.properties import BooleanProperty
 
+
 # OTHER IMPORTS
 import heapq
 import os
@@ -32,7 +33,7 @@ from sklearn.model_selection import train_test_split
 Window.clearcolor = (1, 1, 1, 0.9)
 
 #Import medical dataset
-dataset = pd.read_csv("D:\\OneDrive\\Desktop\\Programming\\Python Scripts\\Kivy\\GradProject\\Datasets\\Dataset_v6.csv",names=['symptom', 'disease'])
+dataset = pd.read_csv("C:\\Users\\Bora\\Documents\\GitHub\\GradProject\\Datasets\\Dataset_v6.csv",names=['symptom', 'disease'])
 
 #Split into symptoms and diseases
 symptoms, diseases = dataset[['symptom']], dataset[['disease']]

@@ -11,7 +11,7 @@
 
 <CustomButton@Button>
     valign: "middle"
-    background_color: 0, 0.5, 1, 0.5
+    background_color: 0.35, 0.80, 0.40, 0.5
     size_hint: .2, .2
 
     
@@ -46,6 +46,12 @@ WindowManager:
         CustomLabel:
             text: "Disease Prediction by Symptoms"
             pos_hint: {'center_x': .5}
+
+        Image:
+
+            source: 'Logo.png'
+            size: self.texture_size
+
         AnchorLayout:
             CustomButton:
                 text: "Start"
