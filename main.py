@@ -6,24 +6,23 @@ Created on Fri Mar 12 00:43:41 2021
 """
 
 # KIVY IMPORTS
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.properties import BooleanProperty
+from kivy.uix.gridlayout import GridLayout
 
 
 # OTHER IMPORTS
 import heapq
-import os
 
 # NUMPY AND PANDAS
 import numpy as np
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
-# MATPLOTLIB
-import matplotlib.pyplot as plt
-import matplotlib as mpl
+# PIECHART - Special thanks to MrTequila on https://github.com/MrTequila/kivy-PieChart
+import PieChart as pc
 
 # SCIKIT-LEARN IMPORTS
 from sklearn.linear_model import LogisticRegression
@@ -33,7 +32,7 @@ from sklearn.model_selection import train_test_split
 Window.clearcolor = (1, 1, 1, 0.9)
 
 #Import medical dataset
-dataset = pd.read_csv("C:\\Users\\Bora\\Documents\\GitHub\\GradProject\\Datasets\\Dataset_v6.csv",names=['symptom', 'disease'])
+dataset = pd.read_csv("Dataset_v6.csv",names=['symptom', 'disease'])
 
 #Split into symptoms and diseases
 symptoms, diseases = dataset[['symptom']], dataset[['disease']]
@@ -69,12 +68,18 @@ class Window(Screen):
         return symptoms_norm.columns[index]
 
     def reset_answer(self):
-        self.answer1 = BooleanProperty(False)
-        self.answer2 = BooleanProperty(False)
-        self.answer3 = BooleanProperty(False)
-        self.answer4 = BooleanProperty(False)
-        self.answer5 = BooleanProperty(False)
-        self.answer6 = BooleanProperty(False)
+        self.answer1.active = False
+        self.answer2.active = False
+        self.answer3.active = False
+        self.answer4.active = False
+        self.answer5.active = False
+        self.answer6.active = False
+
+    def reset_answer2(self):
+        self.answer1.active = False
+        self.answer2.active = False
+        self.answer3.active = False
+        self.answer4.active = False
 
 class FirstWindow(Window):
     pass
@@ -101,6 +106,10 @@ class EighthWindow(Window):
     pass
 
 class NinthWindow(Window):
+    pass
+
+class FinalWindow(Window):
+    grid = None
     def train(self):
         """Training"""
         # Fit final model
@@ -114,6 +123,7 @@ class NinthWindow(Window):
             probabilities[disease_prob] = int(features[0, 1] * 10000)
             print(f"Score for the disease {diseases_norm.columns.values[disease_prob]}:\n{round(features[0, 1] * 10000, 2)}")
 
+        # Returns a list of n largest numbers' indices
         prob_indices = heapq.nlargest(5, range(len(probabilities)), probabilities.__getitem__)
         max_prob = [None] * 5
         max_disease = [None] * 5
@@ -122,38 +132,40 @@ class NinthWindow(Window):
             max_prob[index] = probabilities[prob_indices[index]]
             max_disease[index] = diseases_norm.columns.values[prob_indices[index]]
 
-        # Set font size
-        mpl.rcParams['font.size'] = 9.0
+        zip_iterator = zip(max_disease, max_prob)
+        in_data = dict(zip_iterator)
 
-        # Colors
-        colors = ['#8870FF', '#6DD582', '#D2D56D', '#D57E6D', '#D26DD5']
+        position = (100, 100)
+        size = (250, 250)
+        chart = pc.PieChart(data=in_data, position=position, size=size, legend_enable=True)
 
-        fig, ax = plt.subplots()
-        ax.pie(max_prob, colors=colors, labels=max_disease, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+        train_id = self.ids.train_results
+        self.grid = GridLayout(cols=1, spacing='1dp')
+        self.grid.add_widget(chart)
+        train_id.add_widget(self.grid)
 
-        # Draw circle
-        centre_circle = plt.Circle((0, 0), 0.85, fc='white')
-        fig2 = plt.gcf()
-        fig2.gca().add_artist(centre_circle)
-
-        if (os.path.exists('train_results.png')):
-            os.remove('train_results.png')
-        ax.axis('equal')
-        plt.tight_layout()
-        plt.savefig('train_results.png')
-        plt.show()
-
-class FinalWindow(Window):
-    pass
+    def removeChart(self):
+        train_id = self.ids.train_results
+        train_id.remove_widget(self.grid)
 
 class WindowManager(ScreenManager):
-    pass
-    
+
+    #ScreenManager.screens is Non-Iterable, therefore we have no choice but to copy+paste here
+    def reset_windows(self):
+        ScreenManager.get_screen(self, name='second').reset_answer()
+        ScreenManager.get_screen(self, name='third').reset_answer()
+        ScreenManager.get_screen(self, name='fourth').reset_answer()
+        ScreenManager.get_screen(self, name='fifth').reset_answer()
+        ScreenManager.get_screen(self, name='sixth').reset_answer()
+        ScreenManager.get_screen(self, name='seventh').reset_answer()
+        ScreenManager.get_screen(self, name='eighth').reset_answer()
+        ScreenManager.get_screen(self, name='ninth').reset_answer2()
+
 
 kv = Builder.load_file("dpbs.kv")
 
 #Build
-class DPBSApp(App):
+class DPBSApp(MDApp):
     def build(self):
         return kv
     

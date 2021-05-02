@@ -85,6 +85,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(0, answer1.active)
                     
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -93,6 +95,8 @@ WindowManager:
                 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(1, answer2.active)
                     
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -101,6 +105,8 @@ WindowManager:
                 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(2, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -109,6 +115,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(3, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -117,6 +125,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(4, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -125,6 +135,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(5, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -133,27 +145,12 @@ WindowManager:
                 on_release: 
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(0, answer1.active)
-                    root.set_value(1, answer2.active)
-                    root.set_value(2, answer3.active)
-                    root.set_value(3, answer4.active)
-                    root.set_value(4, answer5.active)
-                    root.set_value(5, answer6.active)
                     
             CustomButton:
                 text: "Next"
                 on_release: 
                     app.root.current = "third"
                     root.manager.transition.direction = "left"
-                    
-                on_press:
-                    root.set_value(0, answer1.active)
-                    root.set_value(1, answer2.active)
-                    root.set_value(2, answer3.active)
-                    root.set_value(3, answer4.active)
-                    root.set_value(4, answer5.active)
-                    root.set_value(5, answer6.active)
         
             
 <ThirdWindow>:
@@ -178,22 +175,28 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
-                    
+                    on_press:
+                        root.set_value(6, answer1.active)
+
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
                     text: str(root.print_symptom(7))
-                
+
                 CustomCheckBox:
                     id: answer2
-                    
+                    on_press:
+                        root.set_value(7, answer2.active)
+
             CustomBoxLayout:
                 orientation: "horizontal"
                 CustomLabel:
                     text: str(root.print_symptom(8))
-                
+
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(8, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -202,6 +205,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(9, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -210,6 +215,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(10, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -218,6 +225,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(11, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -227,27 +236,11 @@ WindowManager:
                     app.root.current = "second"
                     root.manager.transition.direction = "right"
                     
-                on_press:
-                    root.set_value(6, answer1.active)
-                    root.set_value(7, answer2.active)
-                    root.set_value(8, answer3.active)
-                    root.set_value(9, answer4.active)
-                    root.set_value(10, answer5.active)
-                    root.set_value(11, answer6.active)
-                    
             CustomButton:
                 text: "Next"
                 on_release: 
                     app.root.current = "fourth"
                     root.manager.transition.direction = "left"
-                
-                on_press:
-                    root.set_value(6, answer1.active)
-                    root.set_value(7, answer2.active)
-                    root.set_value(8, answer3.active)
-                    root.set_value(9, answer4.active)
-                    root.set_value(10, answer5.active)
-                    root.set_value(11, answer6.active)
 
 <FourthWindow>:
     name: "fourth"
@@ -271,6 +264,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(12, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -279,6 +274,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(13, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -287,6 +284,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(14, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -295,6 +294,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(15, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -303,6 +304,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(16, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -311,6 +314,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(17, answer6.active)
 
 
         CustomBoxLayout:
@@ -320,27 +325,12 @@ WindowManager:
                 on_release:
                     app.root.current = "third"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(12, answer1.active)
-                    root.set_value(13, answer2.active)
-                    root.set_value(14, answer3.active)
-                    root.set_value(15, answer4.active)
-                    root.set_value(16, answer5.active)
-                    root.set_value(17, answer6.active)
 
             CustomButton:
                 text: "Next"
                 on_release:
                     app.root.current = "fifth"
                     root.manager.transition.direction = "left"
-
-                on_press:
-                    root.set_value(12, answer1.active)
-                    root.set_value(13, answer2.active)
-                    root.set_value(14, answer3.active)
-                    root.set_value(15, answer4.active)
-                    root.set_value(16, answer5.active)
-                    root.set_value(17, answer6.active)
 
 <FifthWindow>:
     name: "fifth"
@@ -364,6 +354,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(18, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -372,6 +364,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(19, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -380,6 +374,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(20, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -388,6 +384,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(21, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -396,6 +394,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(22, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -404,6 +404,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(23, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -412,27 +414,12 @@ WindowManager:
                 on_release:
                     app.root.current = "fourth"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(18, answer1.active)
-                    root.set_value(19, answer2.active)
-                    root.set_value(20, answer3.active)
-                    root.set_value(21, answer4.active)
-                    root.set_value(22, answer5.active)
-                    root.set_value(23, answer6.active)
 
             CustomButton:
                 text: "Next"
                 on_release:
                     app.root.current = "sixth"
                     root.manager.transition.direction = "left"
-
-                on_press:
-                    root.set_value(18, answer1.active)
-                    root.set_value(19, answer2.active)
-                    root.set_value(20, answer3.active)
-                    root.set_value(21, answer4.active)
-                    root.set_value(22, answer5.active)
-                    root.set_value(23, answer6.active)
 
 <SixthWindow>:
     name: "sixth"
@@ -456,6 +443,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(24, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -464,6 +453,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(25, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -472,6 +463,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(26, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -480,6 +473,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(27, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -488,6 +483,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(28, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -496,6 +493,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(29, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -504,27 +503,12 @@ WindowManager:
                 on_release:
                     app.root.current = "fifth"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(24, answer1.active)
-                    root.set_value(25, answer2.active)
-                    root.set_value(26, answer3.active)
-                    root.set_value(27, answer4.active)
-                    root.set_value(28, answer5.active)
-                    root.set_value(29, answer6.active)
 
             CustomButton:
                 text: "Next"
                 on_release:
                     app.root.current = "seventh"
                     root.manager.transition.direction = "left"
-
-                on_press:
-                    root.set_value(24, answer1.active)
-                    root.set_value(25, answer2.active)
-                    root.set_value(26, answer3.active)
-                    root.set_value(27, answer4.active)
-                    root.set_value(28, answer5.active)
-                    root.set_value(29, answer6.active)
 
 <SeventhWindow>:
     name: "seventh"
@@ -548,6 +532,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(30, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -556,6 +542,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(31, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -564,6 +552,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(32, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -572,6 +562,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(33, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -580,6 +572,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(34, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -588,6 +582,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(35, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -596,27 +592,12 @@ WindowManager:
                 on_release:
                     app.root.current = "sixth"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(30, answer1.active)
-                    root.set_value(31, answer2.active)
-                    root.set_value(32, answer3.active)
-                    root.set_value(33, answer4.active)
-                    root.set_value(34, answer5.active)
-                    root.set_value(35, answer6.active)
 
             CustomButton:
                 text: "Next"
                 on_release:
                     app.root.current = "eighth"
                     root.manager.transition.direction = "left"
-
-                on_press:
-                    root.set_value(30, answer1.active)
-                    root.set_value(31, answer2.active)
-                    root.set_value(32, answer3.active)
-                    root.set_value(33, answer4.active)
-                    root.set_value(34, answer5.active)
-                    root.set_value(35, answer6.active)
 
 <EighthWindow>:
     name: "eighth"
@@ -640,6 +621,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(36, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -648,6 +631,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(37, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -656,6 +641,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(38, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -664,6 +651,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(39, answer4.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -672,6 +661,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer5
+                    on_press:
+                        root.set_value(40, answer5.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -680,6 +671,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer6
+                    on_press:
+                        root.set_value(41, answer6.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -688,27 +681,12 @@ WindowManager:
                 on_release:
                     app.root.current = "seventh"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(36, answer1.active)
-                    root.set_value(37, answer2.active)
-                    root.set_value(38, answer3.active)
-                    root.set_value(39, answer4.active)
-                    root.set_value(40, answer5.active)
-                    root.set_value(41, answer6.active)
 
             CustomButton:
                 text: "Next"
                 on_release:
                     app.root.current = "ninth"
                     root.manager.transition.direction = "left"
-
-                on_press:
-                    root.set_value(36, answer1.active)
-                    root.set_value(37, answer2.active)
-                    root.set_value(38, answer3.active)
-                    root.set_value(39, answer4.active)
-                    root.set_value(40, answer5.active)
-                    root.set_value(41, answer6.active)
 
 <NinthWindow>:
     name: "ninth"
@@ -730,6 +708,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer1
+                    on_press:
+                        root.set_value(42, answer1.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -738,6 +718,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer2
+                    on_press:
+                        root.set_value(43, answer2.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -746,6 +728,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer3
+                    on_press:
+                        root.set_value(44, answer3.active)
 
             CustomBoxLayout:
                 orientation: "horizontal"
@@ -754,6 +738,8 @@ WindowManager:
 
                 CustomCheckBox:
                     id: answer4
+                    on_press:
+                        root.set_value(45, answer4.active)
 
         CustomBoxLayout:
             orientation: 'horizontal'
@@ -762,31 +748,23 @@ WindowManager:
                 on_release:
                     app.root.current = "eighth"
                     root.manager.transition.direction = "right"
-                on_press:
-                    root.set_value(42, answer1.active)
-                    root.set_value(43, answer2.active)
-                    root.set_value(44, answer3.active)
-                    root.set_value(45, answer4.active)
 
             CustomButton:
-                text: "Next"
+                text: "Train!"
                 on_release:
                     app.root.current = "final"
                     root.manager.transition.direction = "left"
 
-                on_press:
-                    root.set_value(42, answer1.active)
-                    root.set_value(43, answer2.active)
-                    root.set_value(44, answer3.active)
-                    root.set_value(45, answer4.active)
-                    root.train()
-
 <FinalWindow>:
     name: "final"
+    on_enter:
+        root.train()
+
+    on_leave:
+        root.removeChart()
+
     CustomBoxLayout:
-        CustomLabel:
-            text: "Training results..."
-            valign: "top"
+        id: train_results
     CustomBoxLayout:
         orientation: 'horizontal'
         CustomButton:
@@ -796,8 +774,8 @@ WindowManager:
                 root.manager.transition.direction = "right"
 
         CustomButton:
-            text: "Menu"
+            text: "Test again"
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "left"
-                root.reset_answer()
+                root.manager.reset_windows()
