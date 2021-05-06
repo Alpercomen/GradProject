@@ -19,11 +19,11 @@ class PieChart(GridLayout):
         self.size_mine = size
         self.col_default_width = 100
         self.data = {}
-        self.cols = 2
-        self.rows = 1
-        self.col_force_default = True
+        self.cols = 1
+        self.rows = 2
+        self.col_force_default = False
         self.col_default_width = 300
-        self.row_force_default = True
+        self.row_force_default = False
         self.row_default_height = 250
         self.size_hint_y = None
         self.size = (600, 450)

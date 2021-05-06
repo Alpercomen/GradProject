@@ -121,6 +121,8 @@ class FinalWindow(Window):
             model.fit(X_train, y_train)
             features = model.predict_proba(symptom_user)
             probabilities[disease_prob] = int(features[0, 1] * 10000)
+
+            #Print model score
             print(f"Score for the disease {diseases_norm.columns.values[disease_prob]}:\n{round(features[0, 1] * 10000, 2)}")
 
         # Returns a list of n largest numbers' indices
@@ -129,18 +131,18 @@ class FinalWindow(Window):
         max_disease = [None] * 5
 
         for index in range(len(prob_indices)):
-            max_prob[index] = probabilities[prob_indices[index]]
+            max_prob[index] = probabilities[prob_indices[index]] * (10 * (len(prob_indices) - index))
             max_disease[index] = diseases_norm.columns.values[prob_indices[index]]
 
         zip_iterator = zip(max_disease, max_prob)
         in_data = dict(zip_iterator)
 
-        position = (100, 100)
+        position = (250, 250)
         size = (250, 250)
         chart = pc.PieChart(data=in_data, position=position, size=size, legend_enable=True)
 
         train_id = self.ids.train_results
-        self.grid = GridLayout(cols=1, spacing='1dp')
+        self.grid = GridLayout(cols=1, spacing='0dp')
         self.grid.add_widget(chart)
         train_id.add_widget(self.grid)
 

@@ -769,12 +769,14 @@ WindowManager:
         orientation: 'horizontal'
         CustomButton:
             text: "Go Back"
+            size_hint: .1, .1
             on_release:
                 app.root.current = "ninth"
                 root.manager.transition.direction = "right"
 
         CustomButton:
             text: "Test again"
+            size_hint: .1, .1
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "left"
