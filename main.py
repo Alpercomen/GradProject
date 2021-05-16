@@ -13,7 +13,6 @@ from kivy.core.window import Window
 from kivy.properties import BooleanProperty
 from kivy.uix.gridlayout import GridLayout
 
-
 # OTHER IMPORTS
 import heapq
 
@@ -25,11 +24,13 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import PieChart as pc
 
 # SCIKIT-LEARN IMPORTS
-from sklearn.linear_model import LogisticRegression
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
-#Change background color to white
+#Preliminary setups
 Window.clearcolor = (1, 1, 1, 0.9)
+np.set_printoptions(suppress=True)
 
 #Import medical dataset
 dataset = pd.read_csv("Dataset_v6.csv",names=['symptom', 'disease'])
@@ -45,7 +46,6 @@ diseases_norm.columns = diseases_norm.columns.str.replace("disease_", "")
 
 #Create an empy user symptom
 symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1,-1)
-probabilities = [None] * len(diseases_norm.columns)
 
 #Abstract window
 class Window(Screen):
@@ -112,29 +112,28 @@ class FinalWindow(Window):
     grid = None
     def train(self):
         """Training"""
-        # Fit final model
-        model = LogisticRegression(solver='lbfgs')
-        for disease_prob in range(len(diseases_norm.iloc[0])):
-            # Split into train set and test set
-            X_train, X_test, y_train, y_test = train_test_split(symptoms_norm, diseases_norm.iloc[:, 0], train_size=0.7,
-                                                                test_size=0.3, shuffle=True)
-            model.fit(X_train, y_train)
-            features = model.predict_proba(symptom_user)
-            probabilities[disease_prob] = int(features[0, 1] * 10000)
+        #Divide the model into train and test sets
+        X_train, X_test, Y_train, Y_test = train_test_split(symptoms_norm, diseases_norm, train_size= 0.5, test_size= 0.5)
 
-            #Print model score
-            print(f"Score for the disease {diseases_norm.columns.values[disease_prob]}:\n{round(features[0, 1] * 10000, 2)}")
+        #Create model
+        model = MultiOutputRegressor(GradientBoostingRegressor(random_state=0))
 
-        # Returns a list of n largest numbers' indices
-        prob_indices = heapq.nlargest(5, range(len(probabilities)), probabilities.__getitem__)
-        max_prob = [None] * 5
-        max_disease = [None] * 5
+        #Fit Model
+        model.fit(X_train,Y_train)
 
-        for index in range(len(prob_indices)):
-            max_prob[index] = probabilities[prob_indices[index]] * (10 * (len(prob_indices) - index))
-            max_disease[index] = diseases_norm.columns.values[prob_indices[index]]
+        #Store predictions
+        prediction = model.predict(symptom_user)
 
-        zip_iterator = zip(max_disease, max_prob)
+        # Print model score
+        print(f"Predicted output: {prediction[0]}")
+
+        keys = [None] * len(diseases_norm.columns)
+        values = [None] * len(diseases_norm.columns)
+        for i in range(len(prediction[0])):
+            keys[i] = diseases_norm.columns.values[i]
+            values[i] = int(prediction[0][i]*10000)
+            print(f"'{keys[i]}': {values[i]},")
+        zip_iterator = zip(keys, values)
         in_data = dict(zip_iterator)
 
         position = (250, 250)
@@ -149,6 +148,7 @@ class FinalWindow(Window):
     def removeChart(self):
         train_id = self.ids.train_results
         train_id.remove_widget(self.grid)
+        pass
 
 class WindowManager(ScreenManager):
 
