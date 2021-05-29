@@ -6,6 +6,8 @@ Created on Fri Mar 12 00:43:41 2021
 """
 
 # KIVY IMPORTS
+import collections
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -14,7 +16,8 @@ from kivy.properties import BooleanProperty
 from kivy.uix.gridlayout import GridLayout
 
 # OTHER IMPORTS
-import heapq
+import operator
+import itertools
 
 # NUMPY AND PANDAS
 import numpy as np
@@ -110,6 +113,7 @@ class NinthWindow(Window):
 
 class FinalWindow(Window):
     grid = None
+
     def train(self):
         """Training"""
         #Divide the model into train and test sets
@@ -127,18 +131,27 @@ class FinalWindow(Window):
         # Print model score
         print(f"Predicted output: {prediction[0]}")
 
+
+
         keys = [None] * len(diseases_norm.columns)
         values = [None] * len(diseases_norm.columns)
         for i in range(len(prediction[0])):
             keys[i] = diseases_norm.columns.values[i]
             values[i] = int(prediction[0][i]*10000)
             print(f"'{keys[i]}': {values[i]},")
+
         zip_iterator = zip(keys, values)
         in_data = dict(zip_iterator)
 
+        sorted_dict = dict(sorted(  in_data.items(),
+                            key=operator.itemgetter(1),
+                            reverse=True))
+
+        n_item = dict(itertools.islice(sorted_dict.items(), 0, 5))
+
         position = (250, 250)
         size = (250, 250)
-        chart = pc.PieChart(data=in_data, position=position, size=size, legend_enable=True)
+        chart = pc.PieChart(data=n_item, position=position, size=size, legend_enable=True)
 
         train_id = self.ids.train_results
         self.grid = GridLayout(cols=1, spacing='0dp')
