@@ -750,7 +750,7 @@ WindowManager:
                     root.manager.transition.direction = "right"
 
             CustomButton:
-                text: "Train!"
+                text: "Predict!"
                 on_release:
                     app.root.current = "final"
                     root.manager.transition.direction = "left"
@@ -778,6 +778,7 @@ WindowManager:
             text: "Test again"
             size_hint: .1, .1
             on_release:
+                root.resetSymptom()
                 app.root.current = "main"
                 root.manager.transition.direction = "left"
                 root.manager.reset_windows()

@@ -14,6 +14,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.properties import BooleanProperty
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.label import Label
 
 # OTHER IMPORTS
 import operator
@@ -48,7 +49,7 @@ diseases_norm = pd.get_dummies(diseases, drop_first=True)
 diseases_norm.columns = diseases_norm.columns.str.replace("disease_", "")
 
 #Create an empy user symptom
-symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1,-1)
+symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1, -1)
 
 #Abstract window
 class Window(Screen):
@@ -113,20 +114,30 @@ class NinthWindow(Window):
 
 class FinalWindow(Window):
     grid = None
-
+    model = None
     def train(self):
         """Training"""
-        #Divide the model into train and test sets
-        X_train, X_test, Y_train, Y_test = train_test_split(symptoms_norm, diseases_norm, train_size= 0.5, test_size= 0.5)
+        train_id = self.ids.train_results
+        self.grid = GridLayout(cols=1, spacing='0dp')
 
-        #Create model
-        model = MultiOutputRegressor(GradientBoostingRegressor(random_state=0))
+        if self.model == None:
+            #Divide the model into train and test sets
+            X_train, X_test, Y_train, Y_test = train_test_split(symptoms_norm, diseases_norm, train_size= 0.5, test_size= 0.5)
 
-        #Fit Model
-        model.fit(X_train,Y_train)
+            #Create model
+            self.model = MultiOutputRegressor(GradientBoostingRegressor(random_state=0))
 
-        #Store predictions
-        prediction = model.predict(symptom_user)
+            #Fit Model
+            self.model.fit(X_train,Y_train)
+
+        if np.all(symptom_user == 0):
+            self.label = Label(text="[b][color=#000000]You have entered no symptoms![/color][/b]", markup = True)
+            self.grid.add_widget(self.label)
+            train_id.add_widget(self.grid)
+            return
+
+        #Make predictions
+        prediction = self.model.predict(symptom_user)
 
         # Print model score
         print(f"Predicted output: {prediction[0]}")
@@ -139,6 +150,7 @@ class FinalWindow(Window):
             keys[i] = diseases_norm.columns.values[i]
             values[i] = int(prediction[0][i]*10000)
             print(f"'{keys[i]}': {values[i]},")
+
 
         zip_iterator = zip(keys, values)
         in_data = dict(zip_iterator)
@@ -153,7 +165,6 @@ class FinalWindow(Window):
         size = (250, 250)
         chart = pc.PieChart(data=n_item, position=position, size=size, legend_enable=True)
 
-        train_id = self.ids.train_results
         self.grid = GridLayout(cols=1, spacing='0dp')
         self.grid.add_widget(chart)
         train_id.add_widget(self.grid)
@@ -161,7 +172,10 @@ class FinalWindow(Window):
     def removeChart(self):
         train_id = self.ids.train_results
         train_id.remove_widget(self.grid)
-        pass
+
+    def resetSymptom(self):
+        global symptom_user
+        symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1, -1)
 
 class WindowManager(ScreenManager):
 
@@ -175,7 +189,6 @@ class WindowManager(ScreenManager):
         ScreenManager.get_screen(self, name='seventh').reset_answer()
         ScreenManager.get_screen(self, name='eighth').reset_answer()
         ScreenManager.get_screen(self, name='ninth').reset_answer2()
-
 
 kv = Builder.load_file("dpbs.kv")
 
