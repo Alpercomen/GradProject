@@ -142,10 +142,12 @@ class FinalWindow(Window):
         #Make predictions
         prediction = self.model.predict(symptom_user)
 
-        # Print model score
+        # Print and store model score
+        model_scores = [None] * len(Y_test.columns)
         print(f"Predicted output: {prediction[0]}")
         for i in range(len(Y_test.columns)):
-            print(f"{Y_test.columns[i]} MSE score: {mean_squared_error(Y_test.iloc[:, i], prediction[0])}")
+            model_scores[i] = mean_squared_error(Y_test.iloc[:, i], prediction[0])
+            print(f"{Y_test.columns[i]} MSE score: {model_scores[i]}")
 
 
         keys = [None] * len(diseases_norm.columns)
@@ -155,7 +157,17 @@ class FinalWindow(Window):
             values[i] = int(prediction[0][i]*1000000)
             print(f"'{keys[i]}': {values[i]},")
 
+        #Store model performance in a dictionary
+        model_iterator = zip(keys, model_scores)
+        score_data = dict(model_iterator)
+        score_values = list(score_data.values())
 
+        error_id = self.ids.error_rates
+        self.error_rates = Label(text="[color=#000000]You have entered no symptoms![/color]", markup=True)
+        self.grid2.add_widget(self.error_rates)
+        error_id.add_widget(self.grid2)
+
+        #Create a dictionary containing diseases and its respective percentage
         zip_iterator = zip(keys, values)
         in_data = dict(zip_iterator)
 
