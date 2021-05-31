@@ -31,6 +31,7 @@ import PieChart as pc
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 
 #Preliminary setups
 Window.clearcolor = (1, 1, 1, 0.9)
@@ -120,9 +121,11 @@ class FinalWindow(Window):
         train_id = self.ids.train_results
         self.grid = GridLayout(cols=1, spacing='0dp')
 
+        global X_train, X_test, Y_train, Y_test
+
         if self.model == None:
             #Divide the model into train and test sets
-            X_train, X_test, Y_train, Y_test = train_test_split(symptoms_norm, diseases_norm, train_size= 0.5, test_size= 0.5)
+            X_train, X_test, Y_train, Y_test = train_test_split(symptoms_norm, diseases_norm, test_size= 0.165)
 
             #Create model
             self.model = MultiOutputRegressor(GradientBoostingRegressor(random_state=0))
@@ -131,7 +134,7 @@ class FinalWindow(Window):
             self.model.fit(X_train,Y_train)
 
         if np.all(symptom_user == 0):
-            self.label = Label(text="[b][color=#000000]You have entered no symptoms![/color][/b]", markup = True)
+            self.label = Label(text="[color=#000000]You have entered no symptoms![/color]", markup = True)
             self.grid.add_widget(self.label)
             train_id.add_widget(self.grid)
             return
@@ -141,14 +144,15 @@ class FinalWindow(Window):
 
         # Print model score
         print(f"Predicted output: {prediction[0]}")
-
+        for i in range(len(Y_test.columns)):
+            print(f"{Y_test.columns[i]} MSE score: {mean_squared_error(Y_test.iloc[:, i], prediction[0])}")
 
 
         keys = [None] * len(diseases_norm.columns)
         values = [None] * len(diseases_norm.columns)
         for i in range(len(prediction[0])):
             keys[i] = diseases_norm.columns.values[i]
-            values[i] = int(prediction[0][i]*10000)
+            values[i] = int(prediction[0][i]*1000000)
             print(f"'{keys[i]}': {values[i]},")
 
 
