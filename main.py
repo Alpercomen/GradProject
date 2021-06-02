@@ -2,7 +2,6 @@
 """
 Created on Fri Mar 12 00:43:41 2021
 
-@author: alper
 """
 
 # KIVY IMPORTS
@@ -134,7 +133,7 @@ class FinalWindow(Window):
             self.model.fit(X_train,Y_train)
 
         if np.all(symptom_user == 0):
-            self.label = Label(text="[color=#000000]You have entered no symptoms![/color]", markup = True)
+            self.label = Label(text="[color=#000000]You have entered no symptoms![/color]", font_size= "20sp", markup = True)
             self.grid.add_widget(self.label)
             train_id.add_widget(self.grid)
             return
