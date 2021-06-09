@@ -34,7 +34,7 @@ from sklearn.metrics import mean_squared_error
 
 #Preliminary setups
 Window.clearcolor = (1, 1, 1, 0.9)
-np.set_printoptions(suppress=True)
+np.set_printoptions(suppress=True) #This prevents showing scientific notation.
 
 #Import medical dataset
 dataset = pd.read_csv("Dataset_v6.csv",names=['symptom', 'disease'])
@@ -53,6 +53,7 @@ symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1, -1)
 
 #Abstract window
 class Window(Screen):
+    #Checkbox results in one window are stored here, initially False
     answer1 = BooleanProperty(False)
     answer2 = BooleanProperty(False)
     answer3 = BooleanProperty(False)
@@ -72,6 +73,7 @@ class Window(Screen):
         return symptoms_norm.columns[index]
 
     def reset_answer(self):
+        #Non-iterable, reseting answers
         self.answer1.active = False
         self.answer2.active = False
         self.answer3.active = False
@@ -80,6 +82,7 @@ class Window(Screen):
         self.answer6.active = False
 
     def reset_answer2(self):
+        #Non-iterable, reseting answers for the last page only.
         self.answer1.active = False
         self.answer2.active = False
         self.answer3.active = False
@@ -113,10 +116,11 @@ class NinthWindow(Window):
     pass
 
 class FinalWindow(Window):
-    grid = None
-    model = None
+    grid = None # To be able to show the results in UI, an empty grid is set.
+    model = None # To avoid training over and over again everytime input is entered, training model is stored here.
     def train(self):
         """Training"""
+        #Store train id
         train_id = self.ids.train_results
         self.grid = GridLayout(cols=1, spacing='0dp')
 
@@ -160,25 +164,29 @@ class FinalWindow(Window):
         zip_iterator = zip(keys, values)
         in_data = dict(zip_iterator)
 
+        #Sort it in reverse order
         sorted_dict = dict(sorted(  in_data.items(),
                             key=operator.itemgetter(1),
                             reverse=True))
 
+        #Take the first five values, resulting in five largest values
         n_item = dict(itertools.islice(sorted_dict.items(), 0, 5))
 
+        #Create and send a Pie Chart to front end
         position = (250, 250)
         size = (250, 250)
         chart = pc.PieChart(data=n_item, position=position, size=size, legend_enable=True)
-
         self.grid = GridLayout(cols=1, spacing='0dp')
         self.grid.add_widget(chart)
         train_id.add_widget(self.grid)
 
     def removeChart(self):
+        """"Remoes Chart from front-end"""
         train_id = self.ids.train_results
         train_id.remove_widget(self.grid)
 
     def resetSymptom(self):
+        """Resets the given symptom input by the user"""
         global symptom_user
         symptom_user = np.zeros(shape=len(symptoms_norm.columns)).reshape(1, -1)
 
@@ -186,6 +194,7 @@ class WindowManager(ScreenManager):
 
     #ScreenManager.screens is Non-Iterable, therefore we have no choice but to copy+paste here
     def reset_windows(self):
+        """"Resets each UI check box"""
         ScreenManager.get_screen(self, name='second').reset_answer()
         ScreenManager.get_screen(self, name='third').reset_answer()
         ScreenManager.get_screen(self, name='fourth').reset_answer()
